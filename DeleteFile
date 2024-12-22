@@ -1,0 +1,36 @@
+package se.maha.craft.useful;
+
+import java.io.File;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Stack;
+
+public class DeleteFile {
+
+    private boolean deleteFileByPath(String path) {
+        File file = new File(path);
+
+        if (!file.exists()) {
+            System.out.println("File doesn't exists");
+            return false;
+        }
+
+        return file.delete();
+    }
+
+    public static void main(String[] args) {
+        DeleteFile dF = new DeleteFile();
+
+        Deque<String> stack = new ArrayDeque<>();
+        stack.push("index.jpg");
+
+        stack.forEach(item -> {
+            var status = dF.deleteFileByPath(stack.pop());
+            if (status) {
+                System.out.println("Successfully deleted file!");
+            }
+        });
+
+    }
+
+}
